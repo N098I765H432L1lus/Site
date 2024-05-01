@@ -1,0 +1,30 @@
+База данных
+1)Workshops - Мастерские
+	1.1)id
+	1.2)name - Название
+	1.3)address - Адрес
+2)Acceptance - Место приёма заказов и выдочи
+	2.1)id
+	2.2)name - Название
+	2.3)address - Адрес
+3)Jobs - Рабочие места
+	3.1)id
+	3.2)name - Название
+	3.3)id_w_shop - id Workshops - id Мастерской
+4)Spare_parts_prod - Запчасти для ремонта
+	4.1)id
+	4.2)name - Название
+	4.3)id_category_prod - id Product_category - id Категории товаров
+	3.3)id_w_shop - id Workshops - id Мастерской
+5)Product_category - Категория товаров + для каждой новой
+	5.1)id
+	5.2)name - Название
+	+5.+)id_accessories - id Accessories - id Компликтующих (после создания через сайт)
+6)Accessories - Компликтующие
+	6.1)id
+	6.2)name - Название
+	6.3)id_w_shop - id Workshops - id Мастерской
+	6.4)quantity - Количество
+
+Название и назначение файлов
+index.php - Вход на сайт
