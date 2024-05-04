@@ -3,7 +3,7 @@ require_once 'view/header.html';
 ?>
 <h5>Добавить мастерскую</h5>
 <form method="POST" action="controller/add_ws.php" enctype="multipart/form-data">
-	Фотография<input type="file" name="image">
+	Фотография:<input type="file" name="image">
 	<input type="text" name="name" placeholder="Название мастерской">
 	<input type="text" name="address" placeholder="Адрес мастерской">
 	<input type="submit" name="reg">

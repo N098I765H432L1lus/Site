@@ -1,0 +1,19 @@
+header{
+	display: flex;
+}
+
+a { margin: 5px; }
+
+.but_logo {display: flex;}
+
+.but_head {display: flex;}
+
+.logo img{
+	max-width: 60px;
+	max-height: 60px;
+}
+
+table {
+	display: flex;
+	margin: 5px;
+}
