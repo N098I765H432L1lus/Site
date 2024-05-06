@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 01 2024 г., 15:20
+-- Время создания: Май 06 2024 г., 21:12
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -48,11 +48,27 @@ INSERT INTO `Acceptance` (`id`, `image`, `name`, `address`) VALUES
 --
 
 CREATE TABLE `Accessories` (
-  `id` int NOT NULL,
+  `id` varchar(250) COLLATE utf8mb4_german2_ci NOT NULL,
+  `images` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_german2_ci NOT NULL,
   `id_w_shop` int NOT NULL,
-  `quantity` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL
+  `id_type_aces` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_german2_ci NOT NULL,
+  `id_dev` varchar(255) COLLATE utf8mb4_german2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- Дамп данных таблицы `Accessories`
+--
+
+INSERT INTO `Accessories` (`id`, `images`, `name`, `id_w_shop`, `id_type_aces`, `id_dev`) VALUES
+('1', 'intel core0502142959_.png', 'intel core', 1, '1', NULL),
+('123_1', 'опер_10505143415_.png', 'опер_1', 1, '6', NULL),
+('123_2', 'опер_20505143451_.jpg', 'опер_2', 1, '6', NULL),
+('245', 'Iron_disc0505143615_.jpg', 'Iron_disc', 1, '8', NULL),
+('423', 'Куллер geb0505142904_.png', 'Куллер geb', 1, '4', NULL),
+('4324', 'acse micro0505142819_.png', 'acse micro', 1, '2', NULL),
+('63', 'Microsoft V0505142949_.png', 'Microsoft V', 1, '5', NULL),
+('734', 'energi0505143526_.png', 'energi', 1, '7', NULL);
 
 -- --------------------------------------------------------
 
@@ -73,6 +89,68 @@ CREATE TABLE `Jobs` (
 INSERT INTO `Jobs` (`id`, `name`, `id_w_shop`) VALUES
 (1, '3', 1),
 (2, '2', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `technic`
+--
+
+CREATE TABLE `technic` (
+  `id` int NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_german2_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
+  `Type_dev` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Type_aces`
+--
+
+CREATE TABLE `Type_aces` (
+  `id` int NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_german2_ci NOT NULL,
+  `quantity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_german2_ci DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- Дамп данных таблицы `Type_aces`
+--
+
+INSERT INTO `Type_aces` (`id`, `name`, `quantity`) VALUES
+(1, 'процессоры', '1'),
+(2, 'Материнки', '1'),
+(3, 'Другие', '0'),
+(4, 'Охлаждение', '1'),
+(5, 'Видео карта', '1'),
+(6, 'планки оперативной памяти', '2'),
+(7, 'Блок питания', '1'),
+(8, 'Жёсткий диск', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Type_dev`
+--
+
+CREATE TABLE `Type_dev` (
+  `id` int NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_german2_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
+  `quantity_aces` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_german2_ci DEFAULT NULL,
+  `quantity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_german2_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- Дамп данных таблицы `Type_dev`
+--
+
+INSERT INTO `Type_dev` (`id`, `name`, `description`, `quantity_aces`, `quantity`) VALUES
+(5, 'Компьютерный блок', 'Блок', '8', NULL),
+(6, 'Планшет', 'description', '5', NULL);
 
 -- --------------------------------------------------------
 
@@ -143,6 +221,24 @@ ALTER TABLE `Jobs`
   ADD KEY `id_w_shop` (`id_w_shop`);
 
 --
+-- Индексы таблицы `technic`
+--
+ALTER TABLE `technic`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `Type_aces`
+--
+ALTER TABLE `Type_aces`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `Type_dev`
+--
+ALTER TABLE `Type_dev`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `users`
 --
 ALTER TABLE `users`
@@ -165,16 +261,28 @@ ALTER TABLE `Acceptance`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT для таблицы `Accessories`
---
-ALTER TABLE `Accessories`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT для таблицы `Jobs`
 --
 ALTER TABLE `Jobs`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT для таблицы `technic`
+--
+ALTER TABLE `technic`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `Type_aces`
+--
+ALTER TABLE `Type_aces`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT для таблицы `Type_dev`
+--
+ALTER TABLE `Type_dev`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -187,16 +295,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `Workshops`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Ограничения внешнего ключа сохраненных таблиц
---
-
---
--- Ограничения внешнего ключа таблицы `Accessories`
---
-ALTER TABLE `Accessories`
-  ADD CONSTRAINT `accessories_ibfk_1` FOREIGN KEY (`id_w_shop`) REFERENCES `Workshops` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
