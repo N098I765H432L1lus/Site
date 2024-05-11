@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 06 2024 г., 21:12
+-- Время создания: Май 11 2024 г., 16:37
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -61,14 +61,36 @@ CREATE TABLE `Accessories` (
 --
 
 INSERT INTO `Accessories` (`id`, `images`, `name`, `id_w_shop`, `id_type_aces`, `id_dev`) VALUES
-('1', 'intel core0502142959_.png', 'intel core', 1, '1', NULL),
-('123_1', 'опер_10505143415_.png', 'опер_1', 1, '6', NULL),
-('123_2', 'опер_20505143451_.jpg', 'опер_2', 1, '6', NULL),
-('245', 'Iron_disc0505143615_.jpg', 'Iron_disc', 1, '8', NULL),
-('423', 'Куллер geb0505142904_.png', 'Куллер geb', 1, '4', NULL),
-('4324', 'acse micro0505142819_.png', 'acse micro', 1, '2', NULL),
-('63', 'Microsoft V0505142949_.png', 'Microsoft V', 1, '5', NULL),
-('734', 'energi0505143526_.png', 'energi', 1, '7', NULL);
+('1', 'intel core0502142959_.png', 'intel core', 1, '1', '4'),
+('123_1', 'опер_10505143415_.png', 'опер_1', 1, '6', '4'),
+('123_2', 'опер_20505143451_.jpg', 'опер_2', 1, '6', '4'),
+('245', 'Iron_disc0505143615_.jpg', 'Iron_disc', 1, '8', '4'),
+('423', 'Куллер geb0505142904_.png', 'Куллер geb', 1, '4', '4'),
+('4324', 'acse micro0505142819_.png', 'acse micro', 1, '2', '4'),
+('63', 'Microsoft V0505142949_.png', 'Microsoft V', 1, '5', '4'),
+('734', 'energi0505143526_.png', 'energi', 1, '7', '4'),
+('e24ew', 'Dell0511123501_.', 'Dell', 1, '9', '');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Applications`
+--
+
+CREATE TABLE `Applications` (
+  `id` int NOT NULL,
+  `Name` varchar(50) COLLATE utf8mb4_german2_ci NOT NULL,
+  `num_phone` tinyint(1) NOT NULL,
+  `Type_dev` int NOT NULL,
+  `Task_id` int NOT NULL,
+  `description` varchar(250) COLLATE utf8mb4_german2_ci NOT NULL,
+  `status` varchar(1) COLLATE utf8mb4_german2_ci NOT NULL DEFAULT '1',
+  `image` varchar(250) COLLATE utf8mb4_german2_ci NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `surname` varchar(50) COLLATE utf8mb4_german2_ci NOT NULL,
+  `patronymic` varchar(50) COLLATE utf8mb4_german2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 -- --------------------------------------------------------
 
@@ -79,7 +101,7 @@ INSERT INTO `Accessories` (`id`, `images`, `name`, `id_w_shop`, `id_type_aces`, 
 CREATE TABLE `Jobs` (
   `id` int NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_german2_ci NOT NULL,
-  `id_w_shop` int NOT NULL
+  `id_w_shop` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
 
 --
@@ -87,7 +109,7 @@ CREATE TABLE `Jobs` (
 --
 
 INSERT INTO `Jobs` (`id`, `name`, `id_w_shop`) VALUES
-(1, '3', 1),
+(1, 'Нет', 0),
 (2, '2', 1);
 
 -- --------------------------------------------------------
@@ -101,8 +123,18 @@ CREATE TABLE `technic` (
   `image` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
   `name` varchar(50) COLLATE utf8mb4_german2_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
-  `Type_dev` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL
+  `Type_dev` varchar(255) COLLATE utf8mb4_german2_ci NOT NULL,
+  `id_jobs` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_german2_ci;
+
+--
+-- Дамп данных таблицы `technic`
+--
+
+INSERT INTO `technic` (`id`, `image`, `name`, `description`, `Type_dev`, `id_jobs`) VALUES
+(3, '', 'Свободно', '', '', NULL),
+(4, 'Компьютер0508125447_.png', 'Компьютер', 'Блок', '5', 2),
+(6, 'Удаление0511125859_.png', 'Удаление', 'description', '7', 2);
 
 -- --------------------------------------------------------
 
@@ -128,7 +160,8 @@ INSERT INTO `Type_aces` (`id`, `name`, `quantity`) VALUES
 (5, 'Видео карта', '1'),
 (6, 'планки оперативной памяти', '2'),
 (7, 'Блок питания', '1'),
-(8, 'Жёсткий диск', '1');
+(8, 'Жёсткий диск', '1'),
+(9, 'Экран', '1');
 
 -- --------------------------------------------------------
 
@@ -149,8 +182,10 @@ CREATE TABLE `Type_dev` (
 --
 
 INSERT INTO `Type_dev` (`id`, `name`, `description`, `quantity_aces`, `quantity`) VALUES
-(5, 'Компьютерный блок', 'Блок', '8', NULL),
-(6, 'Планшет', 'description', '5', NULL);
+(3, 'Свободно', '', NULL, NULL),
+(5, 'Компьютерный блок', 'Блок', '8', '1'),
+(6, 'Планшет', 'description', '5', NULL),
+(7, 'Удаление', 'description', '1', '2');
 
 -- --------------------------------------------------------
 
@@ -214,6 +249,12 @@ ALTER TABLE `Accessories`
   ADD KEY `id_w_shop` (`id_w_shop`);
 
 --
+-- Индексы таблицы `Applications`
+--
+ALTER TABLE `Applications`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `Jobs`
 --
 ALTER TABLE `Jobs`
@@ -261,6 +302,12 @@ ALTER TABLE `Acceptance`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT для таблицы `Applications`
+--
+ALTER TABLE `Applications`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `Jobs`
 --
 ALTER TABLE `Jobs`
@@ -270,19 +317,19 @@ ALTER TABLE `Jobs`
 -- AUTO_INCREMENT для таблицы `technic`
 --
 ALTER TABLE `technic`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `Type_aces`
 --
 ALTER TABLE `Type_aces`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `Type_dev`
 --
 ALTER TABLE `Type_dev`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

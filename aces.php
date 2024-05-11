@@ -52,7 +52,7 @@ require_once 'view/header.html';
 <table>
 	<tr>
 		<th>Тип</th>
-		<th>Изоброжение</th>
+		<th>Изображение</th>
 		<th>Серийный номер</th>
 		<th>Название</th>
 		<th>Адрес</th>

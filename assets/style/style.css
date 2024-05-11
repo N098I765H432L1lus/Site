@@ -17,3 +17,5 @@ table {
 	display: flex;
 	margin: 5px;
 }
+
+input {white-space: pre;}

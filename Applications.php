@@ -5,6 +5,11 @@ require_once 'view/header.html';
 
 	<h5>Тип техники:</h5>
 <form method="POST" action="dev_comp.php" enctype="multipart/form-data">
+	Фотография:<input type="file" name="image">
+	<input type="text" name="num_phone" placeholder="Номер телефона"><br>
+	<input type="text" name="surname" placeholder="Фамилия"><br>
+	<input type="text" name="name" placeholder="Имя"><br>
+	<input type="text" name="patronymic" placeholder="Отчество"><br>
 	<select name="Type_dev">
 	<?php
 	$tp_sql="SELECT * FROM `Type_dev`";
@@ -19,7 +24,7 @@ require_once 'view/header.html';
 		echo "<option value='$id_tp'><h5>$name_tp $description количеств: $quantity</h5></option>";
 	}
 	?>
-	</select>
+	</select><br>
 	<input type="submit" name="reg">
 </form>
 
@@ -30,7 +35,7 @@ require_once 'view/header.html';
 ?></div>
 
 
-	<?php
+<!--	<?php
 	$tp_sql_aces="SELECT * FROM `technic`";
 	$run_tp_sql_aces=mysqli_query($con, $tp_sql_aces);
 
@@ -63,7 +68,7 @@ require_once 'view/header.html';
 		}
 	}
 	?>
-</table>
+</table>-->
 
 <?php
 require_once 'view/footer.html';

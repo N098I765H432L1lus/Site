@@ -30,7 +30,7 @@ require_once 'view/header.html';
 		echo "
 		<table>
 		<tr>
-			<th>Изоброжение</th>
+			<th>Изображение</th>
 			<th>Название</th>
 			<th>Адрес</th>
 		</tr>";

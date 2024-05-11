@@ -125,7 +125,7 @@ require_once 'view/header.html';
 ?></div>
 <table>
 	<tr>
-		<th>Изоброжение</th>
+		<th>Изображение</th>
 		<th>Название</th>
 		<th>Адрес</th>
 		<th>Действия</th>

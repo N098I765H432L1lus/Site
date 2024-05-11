@@ -39,7 +39,8 @@ echo "<form method='POST' action='controller/add_dev.php?Type_dev=$Type_dev' enc
 		$run_out_user = mysqli_query($con, $out_user);
 		$rows_count = mysqli_num_rows($run_out_user);
 
-		if ($rows_count=='0') {
+		if ($id_dev_aces) {}
+		else {
 		$tp_sql_aces="SELECT * FROM `Type_aces` WHERE `id`='$id_type_aces_aces'";
 		$run_tp_sql_aces=mysqli_query($con, $tp_sql_aces);
 		$row_td_aces = mysqli_fetch_array($run_tp_sql_aces);
@@ -55,17 +56,46 @@ echo "<form method='POST' action='controller/add_dev.php?Type_dev=$Type_dev' enc
 
 		}
 	}
-		echo "</select>";
-		echo "Type_dev_$i";
+		echo "</select><br>";
+	}
+	?>
+
+	<label for="jobs"><h5>Рабочее место:</h5></label>
+	<select name="jobs">
+	<?php
+	$jobs_sql="SELECT * FROM `Jobs`";
+	$run_jobs_sql=mysqli_query($con, $jobs_sql);
+
+	while ($row_jobs = mysqli_fetch_array($run_jobs_sql)) {
+		$id=$row_jobs['id'];
+		$name=$row_jobs['name'];
+		$id_w_shop=$row_jobs['id_w_shop'];
+
+		$jobs_ws_sql="SELECT * FROM `Workshops` WHERE `id`='$id_w_shop'";
+		$run_jobs_ws_sql=mysqli_query($con, $jobs_ws_sql);
+
+		$row_jobs_ws = mysqli_fetch_array($run_jobs_ws_sql);
+		$image_jobs_ws=$row_jobs_ws['image'];
+		$name_jobs_ws=$row_jobs_ws['name'];
+		$address_jobs_ws=$row_jobs_ws['address'];
+
+		echo "<option value='$id'><h5>$name_jobs_ws $address_jobs_ws Место №$name</h5></option>";
 	}
 
-	/*while () {
 
+	$acce_sql="SELECT * FROM `Acceptance`";
+	$run_acce_sql=mysqli_query($con, $acce_sql);
 
+	while ($row_acce = mysqli_fetch_array($run_acce_sql)) {
+		$id_acce=$row_acce['id'];
+		$name_acce=$row_acce['name'];
+		$name_acce=$row_acce['name'];
+		$address_acce=$row_acce['address'];
 
-		echo "<option value='$id_tp'><h5>$name_tp $description количеств: $quantity</h5></option>";
-	}*/
+		echo "<option value='$id_acce'><h5>$name_acce $address_acce </h5></option>";
+	}
 	?>
+	</select>
 
 	<input type="submit" name="reg">
 </form>
@@ -76,50 +106,10 @@ echo "<form method='POST' action='controller/add_dev.php?Type_dev=$Type_dev' enc
 	unset($_SESSION['error']);
 ?></div>
 
-<!--<table>
-	<tr>
-		<th>Тип</th>
-		<th>Изоброжение</th>
-		<th>Серийный номер</th>
-		<th>Название</th>
-		<th>Адрес</th>
-		<th>Действия</th>
-	</tr>
-	<?php/*
-	$jobs_sql="SELECT * FROM `Accessories`";
-	$run_jobs_sql=mysqli_query($con, $jobs_sql);
+<?php
 
-	while ($row_aces = mysqli_fetch_array($run_jobs_sql)) {
-		$id_aces=$row_aces['id'];
-		$image_aces=$row_aces['images'];
-		$name_aces=$row_aces['name'];
-		$id_w_shop_aces=$row_aces['id_w_shop'];
-		$id_type_aces_aces=$row_aces['id_type_aces'];
+?>
 
-		$tp_sql_aces="SELECT * FROM `Type_aces` WHERE `id`='$id_type_aces_aces'";
-		$run_tp_sql_aces=mysqli_query($con, $tp_sql_aces);
-		$row_td_aces = mysqli_fetch_array($run_tp_sql_aces);
-		$name_td_aces=$row_td_aces['name'];
-
-		$ws_sql_aces="SELECT * FROM `Workshops` WHERE `id`='$id_w_shop_aces'";
-		$run_ws_sql_aces=mysqli_query($con, $ws_sql_aces);
-		$row_ws_aces = mysqli_fetch_array($run_ws_sql_aces);
-		$name_ws_aces=$row_ws_aces['name'];
-		$address_ws_aces=$row_ws_aces['address'];
-		echo "
-		<tr>
-		<td>$name_td_aces</td>
-		<td><div class='logo'><img src='assets/image/Accessories/$image_aces'></div></td>
-		<td>$id_aces</td>
-		<td>$name_aces</td>
-		<td>$name_ws_aces $address_ws_aces</td>
-		<th><a href='controller/acse_dell.php?id=$id_aces'>Удалить</a></th>
-		<th><a href=ws_edit.php?id=$id_aces>Редактировать</a></th>
-		</tr>
-		";
-	}*/
-	?>
-</table>-->
 <?php
 require_once 'view/footer.html';
 ?>

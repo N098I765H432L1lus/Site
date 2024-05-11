@@ -10,7 +10,7 @@ $run_del_sql = mysqli_query($con, $del_sql);
 
 if ($run_del_sql) {
 
-	$user_del_sql = "DELETE FROM `users` WHERE `jobs_id`='$id_ws'";
+	$user_del_sql = "UPDATE `users` SET `jobs_id`='$id_ws' WHERE `jobs_id`='$id_ws'";
 
 	$run_user_del_sql = mysqli_query($con, $user_del_sql);
 	$file="add_ws.php";

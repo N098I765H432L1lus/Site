@@ -24,42 +24,39 @@ require_once 'view/header.html';
 		$id_td_aces=$row_td_aces['id'];
 		$name_td_aces=$row_td_aces['name'];
 		$description_td_aces=$row_td_aces['description'];
-		$quantity_td_aces=$row_td_aces['quantity'];
+		$quantity_td_aces=$row_td_aces['quantity_aces'];
+		$quantity_td=$row_td_aces['quantity'];
 
 
-		$jobs_sql="SELECT * FROM `Accessories` WHERE `id_type_aces`='$id_td_aces'";
+		$jobs_sql="SELECT * FROM `technic` WHERE `Type_dev`='$id_td_aces'";
 		$run_jobs_sql=mysqli_query($con, $jobs_sql);
 		echo "
 		<table>
 		<tr>
-			<th>Изоброжение</th>
+			<th>Изображение</th>
 			<th>Название</th>
-			<th>Адрес</th>
+			<th>Описание</th>
+			<th>Количество запчастей</th>
 		</tr>";
 
-		echo "$name_td_aces количество: $quantity_td_aces
+		echo "$name_td_aces количество: $quantity_td
 		<a href='controller/dell_aces_type.php?id=$id_td_aces'>Удалить</a>
 		<a href='acse_edit.php?id=$id_td_aces'>Редактировать</a>";
 
 
 		while ($row_aces = mysqli_fetch_array($run_jobs_sql)) {
 			$id_aces=$row_aces['id'];
-			$image_aces=$row_aces['images'];
+			$image_aces=$row_aces['image'];
 			$name_aces=$row_aces['name'];
-			$id_w_shop_aces=$row_aces['id_w_shop'];
+			$description_aces=$row_aces['description'];
 			$id_type_aces_aces=$row_aces['id_type_aces'];
-
-			$ws_sql_aces="SELECT * FROM `Workshops` WHERE `id`='$id_w_shop_aces'";
-			$run_ws_sql_aces=mysqli_query($con, $ws_sql_aces);
-			$row_ws_aces = mysqli_fetch_array($run_ws_sql_aces);
-			$name_ws_aces=$row_ws_aces['name'];
-			$address_ws_aces=$row_ws_aces['address'];
 
 			echo "
 			<tr>
-				<td><div class='logo'><img src='assets/image/Accessories/$image_aces'></div></td>
+				<td><div class='logo'><img src='assets/image/technic/$image_aces'></div></td>
 				<td>$name_aces</td>
-				<td>$name_ws_aces $address_ws_aces</td>
+				<td>$description_aces</td>
+				<td>$quantity_td_aces</td>
 			</tr>
 		";
 		}
